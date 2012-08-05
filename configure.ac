@@ -19,6 +19,7 @@ AC_ARG_WITH([plugindir],
 
 PKG_CHECK_MODULES([GLIB],    [glib-2.0])
 PKG_CHECK_MODULES([BITLBEE], [bitlbee])
+PKG_CHECK_MODULES([JANSSON], [jansson])
 
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
