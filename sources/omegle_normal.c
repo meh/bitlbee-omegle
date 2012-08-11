@@ -42,9 +42,8 @@ static void omegle_normal_send_message(struct im_connection *ic, char *who, char
 
 	GString *data = g_string_new("msg=");
 
-	g_string_append_escaped(data, message);
-
-	omegle_post(bu, bd->session_id, bd->host, "/send", data->str, omegle_http_dummy);
+	if (g_string_append_escaped(data, message))
+		omegle_post(bu, bd->session_id, bd->host, "/send", data->str, omegle_http_dummy);
 
 	g_string_free(data, TRUE);
 }

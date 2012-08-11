@@ -11,6 +11,8 @@ AC_PROG_CC
 AM_PROG_CC_C_O
 AC_PROG_LIBTOOL
 
+AM_CFLAGS="$AM_CFLAGS -std=c99"
+
 AC_ARG_WITH([plugindir],
             [AS_HELP_STRING([--with-plugindir],
                             [BitlBee plugin directory])],

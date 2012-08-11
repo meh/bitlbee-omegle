@@ -21,18 +21,36 @@
 
 static GString *g_string_append_escaped(GString *string, char *data)
 {
-	int i, length = strlen(data);
+	const char* end;
 
-	for (i = 0; i < length; i++) {
-		if (isalpha(data[i]) || isdigit(data[i]) ||
-		    data[i] == '-' || data[i] == '_' || data[i] == '.' || data[i] == '!' ||
-		    data[i] == '~' || data[i] == '*' || data[i] == '\'' || data[i] == '(' || data[i] == ')') {
-			g_string_append_c(string, data[i]);
-		} else if (data[i] == ' ') {
-			g_string_append_c(string, '+');
-		} else {
-			g_string_append_printf(string, "%%%x", data[i]);
+	if (!g_utf8_validate(data, -1, &end)) {
+		return NULL;
+	}
+
+	while (data != end) {
+		gunichar ch = g_utf8_get_char(data);
+
+		if (ch <= 127) {
+			if (isalpha(ch) || isdigit(ch) ||
+					ch == '-' || ch == '_' || ch == '.' || ch == '!' ||
+					ch == '~' || ch == '*' || ch == '\'' || ch == '(' || ch == ')') {
+				g_string_append_c(string, ch);
+			} else if (ch == ' ') {
+				g_string_append_c(string, '+');
+			} else {
+				g_string_append_printf(string, "%%%02x", ch);
+			}
 		}
+		else {
+			char out[6];
+			gint length = g_unichar_to_utf8(ch, out);
+
+			for (size_t i = 0; i < length; i++) {
+				g_string_append_printf(string, "%%%02x", out[i] & 0xff);
+			}
+		}
+
+		data = g_utf8_next_char(data);
 	}
 
 	return string;
