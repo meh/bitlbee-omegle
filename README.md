@@ -38,8 +38,8 @@ Building and Installing
 -----------------------
 
 ```
-$ git clone https://github.com/meh/bitlbee-torchat.git
-$ cd bitlbee-torchat
+$ git clone https://github.com/meh/bitlbee-omegle.git
+$ cd bitlbee-omegle
 $ autoreconf -fi
 $ ./configure
 $ make
