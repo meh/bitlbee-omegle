@@ -7,10 +7,10 @@ aclocal.m4
 autom4te.cache
 config.log
 config.status
+m4
 config
 configure
 INSTALL
 libtool
-m4
 Makefile
 Makefile.in

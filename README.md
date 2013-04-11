@@ -40,7 +40,7 @@ Building and Installing
 ```
 $ git clone https://github.com/meh/bitlbee-omegle.git
 $ cd bitlbee-omegle
-$ autoreconf -fi
+$ ./autogen.sh
 $ ./configure
 $ make
 # make install
