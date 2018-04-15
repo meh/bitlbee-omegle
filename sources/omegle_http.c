@@ -68,7 +68,7 @@ static void omegle_get(void *to_pass, char *host, char *path, http_input_functio
 
 	g_string_append_printf(request, "GET %s HTTP/1.0\r\n", path);
 	g_string_append_printf(request, "Host: %s\r\n", host);
-	g_string_append_printf(request, "User-Agent: BitlBee " BITLBEE_VERSION " " ARCH "/" CPU "\r\n");
+	g_string_append_printf(request, "User-Agent: BitlBee %s\r\n", BITLBEE_VERSION);
 	g_string_append_printf(request, "\r\n");
 
 	http_dorequest(host, 80, 0, request->str, callback, to_pass);
@@ -88,7 +88,7 @@ static void omegle_post(void *to_pass, char *session_id, char *host, char *path,
 
 	g_string_append_printf(request, "POST %s HTTP/1.0\r\n", path);
 	g_string_append_printf(request, "Host: %s\r\n", host);
-	g_string_append_printf(request, "User-Agent: BitlBee " BITLBEE_VERSION " " ARCH "/" CPU "\r\n");
+	g_string_append_printf(request, "User-Agent: BitlBee %s\r\n", BITLBEE_VERSION);
 	g_string_append_printf(request, "Content-Type: application/x-www-form-urlencoded\r\n");
 	g_string_append_printf(request, "Content-Length: %zd\r\n\r\n", form->len);
 	g_string_append_printf(request, "%s", form->str);
